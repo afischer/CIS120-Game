@@ -47,5 +47,9 @@ public class Character {
         grid_y--;
     }
     
+    public void decHP(int amt) {
+        this.hp -= amt;
+    }
+    
     public void draw(Graphics g) {}
 }

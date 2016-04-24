@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 public class PlayerCharacter extends Character {
     public static final String IMG_LOC = FILE_PATH + "charE.png";
@@ -30,6 +31,7 @@ public class PlayerCharacter extends Character {
         } catch (IOException e) {
             System.out.println("Internal Error:" + e.getMessage());
         }
+        
     }
     
     @Override

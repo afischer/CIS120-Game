@@ -21,9 +21,7 @@ public class Dungeon extends JPanel {
     
     public static final int WIDTH  = (int) (screenSize.getWidth() - 400);
     public static final int HEIGHT = (int) (screenSize.getHeight() - 200);
-    
-    public static final int INTERVAL = 30;
-    
+        
     EnemyCharacter ec = new EnemyCharacter();
 
     
@@ -31,7 +29,7 @@ public class Dungeon extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.gray));
         setFocusable(true);
         
-        Timer timer = new Timer(INTERVAL, new ActionListener() {
+        Timer timer = new Timer(Game.INTERVAL, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 tick();
             }
@@ -52,6 +50,7 @@ public class Dungeon extends JPanel {
                 else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {player.moveE();}
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {player.moveS();}
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {player.moveN();}
+                System.out.println("Player at ("+ player.grid_x + ", "+ player.grid_y + ");");
             }
         });
     }
@@ -60,11 +59,19 @@ public class Dungeon extends JPanel {
         if (Math.random() < .01) {
             ec.moveRandom();
         }
-        System.out.println("Player at ("+ player.grid_x + ", "+ player.grid_y + ");");
-        if (!layout[player.grid_x][player.grid_y].isWalkable) {
-            System.out.println("OUCH");
+        if (!layout[player.grid_x][player.grid_y].isWalkable && player.hp > 0) {
+            player.decHP(1);
         }
-        repaint();
+        
+        // Check for death
+        if (player.hp < 1) {
+            JOptionPane.showMessageDialog(null,
+                    "You died.",
+                    "Oh no",
+                    JOptionPane.PLAIN_MESSAGE);
+        } else {
+            repaint();
+        }
     }
 
     @Override

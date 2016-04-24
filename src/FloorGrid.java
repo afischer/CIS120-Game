@@ -29,14 +29,22 @@ public class FloorGrid {
             for (int y = 0; y < layout[0].length; y++) {
                 // TODO: make this adapt to size of tile image
 
-                int curX = (((x + 1) * Game.TILE_W) + (y * Game.TILE_W));
-                int curY = (((y + 1) * Game.TILE_H) - (x * Game.TILE_H)) + Dungeon.HEIGHT/2;
+                int curX = ((x * Game.TILE_W) + (y * Game.TILE_W));
+                int curY = ((y * Game.TILE_H) - (x * Game.TILE_H)) + Dungeon.HEIGHT/2;
                 
                 if (mapArray.charAt(x+(layout[x].length * y)) == '0') {
-                    layout[x][y] = new LavaTile(curX, curY);
+                    layout[x][y] = new LavaTile(curX, curY);    
                 } else {
-                    layout[x][y] = new DirtTile(curX, curY);
+                    if (x == 1 && y == 1) {
+                        layout[x][y] = new StairTile(curX, curY, false);
+                    } else if (x == 1 && y == layout[0].length - 2) { 
+                        // FIXME: Grid schenanigans
+                        layout[x][y] = new StairTile(curX, curY, true);
+                    } else {
+                        layout[x][y] = new DirtTile(curX, curY);
+                    }
                 }
+                
             }
         }
     }

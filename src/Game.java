@@ -7,6 +7,8 @@
  */
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -15,20 +17,22 @@ import javax.swing.*;
 public class Game implements Runnable {
     public static int TILE_W = 43;
     public static int TILE_H = 24;
+    public static final int INTERVAL = 30;
 
     public void run() {
         
         final JFrame frame = new JFrame("Game Frame");
         frame.setLocation(0, 0);
         
-        // Status Panel
-        final JPanel statusPanel = new StatusPanel();
-        frame.add(statusPanel, BorderLayout.EAST);
-        
         // Play area
         final Dungeon dungeon = new Dungeon();
         frame.add(dungeon, BorderLayout.WEST);
         dungeon.setFocusable(true);
+        
+        // Status Panel
+        final JPanel statusPanel = new StatusPanel();
+        frame.add(statusPanel, BorderLayout.EAST);
+        
         
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,6 +50,7 @@ public class Game implements Runnable {
                 // add quit event listener for mac because command w pls
             }
         });
+        
     }
     
     public static void main(String[] args) {

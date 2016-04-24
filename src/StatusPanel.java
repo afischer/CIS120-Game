@@ -19,6 +19,13 @@ public class StatusPanel extends JPanel {
     private final JButton resetBtn = new JButton("Restart");
     
     public StatusPanel() {
+        Timer timer = new Timer(Game.INTERVAL, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tick();
+            }
+        });
+        timer.start();
+        
         status.setText("Your Stats:");
         health.setText("HP: " + Dungeon.player.hp);
         
@@ -30,9 +37,18 @@ public class StatusPanel extends JPanel {
         
         this.add(status);
         this.add(resetBtn);
+        this.add(health);
     }
     
+    Timer timer = new Timer(30, new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            repaint();
+        }
+    });
     
+    void tick() {
+        health.setText("HP: " + Dungeon.player.hp);
+    }
     
     private void reset() {
         System.out.println("RESET");
