@@ -7,14 +7,13 @@
 
 import java.awt.Graphics;
 
-import example.Game;
-
 public class Character {
     public static final String FILE_PATH = "img/chars/";
     
     public int pos_x;
     public int pos_y;
-    
+    public int grid_x;
+    public int grid_y;
     
     public int hp;
     
@@ -27,21 +26,25 @@ public class Character {
     public void moveN() {
         pos_x += Game.TILE_W;
         pos_y -= Game.TILE_H;
+        grid_x++;
     }
 
     public void moveS() {
         pos_x -= Game.TILE_W;
         pos_y += Game.TILE_H;
+        grid_x--;
     }
     
     public void moveE() {
         pos_x += Game.TILE_W;
         pos_y += Game.TILE_H;
+        grid_y++;
     }
     
     public void moveW() {
         pos_x -= Game.TILE_W;
         pos_y -= Game.TILE_H;
+        grid_y--;
     }
     
     public void draw(Graphics g) {}

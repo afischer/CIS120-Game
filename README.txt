@@ -49,3 +49,4 @@ PennKey: aff
   have used while implementing your game.
 - Level generation using recursive back-tracing:
   http://weblog.jamisbuck.org/2010/12/27/maze-generation-recursive-backtracking
+- Game textures for floor tiles: https://sftextures.com/

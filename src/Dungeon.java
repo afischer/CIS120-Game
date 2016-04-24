@@ -14,9 +14,11 @@ import javax.swing.*;
 public class Dungeon extends JPanel {
     
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public PlayerCharacter player = new PlayerCharacter();
-    public final FloorGrid grid = new FloorGrid(7, 7, HEIGHT/2);
-
+    public final FloorGrid grid = new FloorGrid(7, 7);
+    private FloorTile[][] layout = grid.getLayout();
+    
+    public static PlayerCharacter player; 
+    
     public static final int WIDTH  = (int) (screenSize.getWidth() - 400);
     public static final int HEIGHT = (int) (screenSize.getHeight() - 200);
     
@@ -25,7 +27,7 @@ public class Dungeon extends JPanel {
     EnemyCharacter ec = new EnemyCharacter();
 
     
-    public Dungeon(JLabel status) {
+    public Dungeon() {        
         setBorder(BorderFactory.createLineBorder(Color.gray));
         setFocusable(true);
         
@@ -36,17 +38,20 @@ public class Dungeon extends JPanel {
         });
         timer.start();
         
+        // Generate floor grid
+        grid.generate();
+        
+        // Initialize player on first non-wall brick
+        player = new PlayerCharacter(
+                layout[1][1].x + Game.TILE_W/2 + 5, 
+                layout[1][1].y - Game.TILE_H - 10);
+        
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {player.moveW();}
                 else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {player.moveE();}
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {player.moveS();}
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {player.moveN();}
-            }
-
-            public void keyReleased(KeyEvent e) {
-//                square.v_x = 0;
-//                square.v_y = 0;
             }
         });
     }
@@ -55,7 +60,10 @@ public class Dungeon extends JPanel {
         if (Math.random() < .01) {
             ec.moveRandom();
         }
-        
+        System.out.println("Player at ("+ player.grid_x + ", "+ player.grid_y + ");");
+        if (!layout[player.grid_x][player.grid_y].isWalkable) {
+            System.out.println("OUCH");
+        }
         repaint();
     }
 

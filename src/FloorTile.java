@@ -16,14 +16,14 @@ public class FloorTile {
     public int width;
     public int height;
     
-    public boolean walkable;
+    public boolean isWalkable;
     
     public FloorTile(int x, int y, boolean walkable) {
         this.x = x;
         this.y = y;
-        this.walkable = walkable;
+        this.isWalkable = walkable;
     }
-
+    
     // Stub method to be overridden.
     public void draw(Graphics g) {}
     
