@@ -23,28 +23,42 @@ public class Character {
         this.hp = start_hp;
     }
     
+    public void setGridPos(int x, int y){
+        this.grid_x = x;
+        this.grid_y = y;
+    }
+    
     public void moveN() {
-        pos_x += Game.TILE_W;
-        pos_y -= Game.TILE_H;
-        grid_x++;
+
+        if (grid_x + 1 < Dungeon.getGridLayout().length - 1 && grid_x > -1) {
+            pos_x += Game.TILE_W;
+            pos_y -= Game.TILE_H;
+            grid_x++;
+        }
     }
 
     public void moveS() {
-        pos_x -= Game.TILE_W;
-        pos_y += Game.TILE_H;
-        grid_x--;
+        if (grid_x - 1 < Dungeon.getGridLayout().length - 1&& grid_x - 1 > -1) {
+            pos_x -= Game.TILE_W;
+            pos_y += Game.TILE_H;
+            grid_x--;
+        }
     }
     
     public void moveE() {
-        pos_x += Game.TILE_W;
-        pos_y += Game.TILE_H;
-        grid_y++;
+        if (grid_y + 1 < Dungeon.getGridLayout()[0].length - 1 && grid_y + 1 > - 1) {
+            pos_x += Game.TILE_W;
+            pos_y += Game.TILE_H;
+            grid_y++;
+        }
     }
     
     public void moveW() {
-        pos_x -= Game.TILE_W;
-        pos_y -= Game.TILE_H;
-        grid_y--;
+        if (grid_y - 1 < Dungeon.getGridLayout()[0].length-1 && grid_y - 1 > -1) {
+            pos_x -= Game.TILE_W;
+            pos_y -= Game.TILE_H;
+            grid_y--;
+        }
     }
     
     public void decHP(int amt) {

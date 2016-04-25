@@ -35,6 +35,10 @@ public class StairTile extends FloorTile {
                 System.out.println("Internal Error:" + e.getMessage());
                 // TODO: handle exception
         }
-        g.drawImage(img, x, y, null);
+        if (isEnd) {
+            g.drawImage(img, x, y, null);
+        } else {
+            g.drawImage(img, x, y - 40, null);
+        }
     }
 }

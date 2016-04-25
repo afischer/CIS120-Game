@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
+
 import javax.swing.*;
 
 /**
@@ -14,7 +16,7 @@ import javax.swing.*;
 public class Dungeon extends JPanel {
     
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public final FloorGrid grid = new FloorGrid(7, 7);
+    public final static FloorGrid grid = new FloorGrid(7, 7);
     private FloorTile[][] layout = grid.getLayout();
     
     public static PlayerCharacter player; 
@@ -41,8 +43,9 @@ public class Dungeon extends JPanel {
         
         // Initialize player on first non-wall brick
         player = new PlayerCharacter(
-                layout[1][1].x + Game.TILE_W/2 + 5, 
-                layout[1][1].y - Game.TILE_H - 10);
+                layout[FloorGrid.START_X][FloorGrid.START_Y].x + Game.TILE_W/2 + 5, 
+                layout[FloorGrid.START_X][FloorGrid.START_Y].y - Game.TILE_H - 10);
+        player.setGridPos(FloorGrid.START_X, FloorGrid.START_Y);
         
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -72,6 +75,27 @@ public class Dungeon extends JPanel {
         } else {
             repaint();
         }
+        
+        // check for win
+        if (player.grid_x == FloorGrid.WIN_X && player.grid_y == FloorGrid.WIN_Y) {
+            JOptionPane.showMessageDialog(null,
+                    "You won.",
+                    "Winner",
+                    JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+    
+    private void generateEnemies(int maxEnemies) {
+        Random r = new Random();
+        int num = r.nextInt(1 - maxEnemies) + maxEnemies;
+        
+        while (num > 0) {
+            
+        }
+    }
+    
+    public static FloorTile[][] getGridLayout() {
+        return grid.getLayout();
     }
 
     @Override
