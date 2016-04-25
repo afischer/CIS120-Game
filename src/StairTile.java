@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 
 /**
  * 
- * LavaTile.java
+ * StairTile.java
  * @author Andrew Fischer
  *
  */

@@ -65,4 +65,8 @@ public class FloorGrid {
     public FloorTile[][] getLayout() {
         return layout;
     }
+    
+    public char[][] getRawCharArray() {
+        return mapArray;
+    }
 }

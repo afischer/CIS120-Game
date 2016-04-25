@@ -1,7 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Random;
-
 import javax.swing.*;
 
 /**
@@ -15,8 +13,10 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class Dungeon extends JPanel {
     
+    public static int floor = 1;
+    
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    public final static FloorGrid grid = new FloorGrid(7, 7);
+    public static FloorGrid grid = new FloorGrid(floor + 4, floor + 4);
     private FloorTile[][] layout = grid.getLayout();
     
     public static PlayerCharacter player; 
@@ -72,26 +72,16 @@ public class Dungeon extends JPanel {
                     "You died.",
                     "Oh no",
                     JOptionPane.PLAIN_MESSAGE);
-        } else {
-            repaint();
-        }
-        
+        } else if (player.grid_x == FloorGrid.WIN_X && player.grid_y == FloorGrid.WIN_Y) {
         // check for win
-        if (player.grid_x == FloorGrid.WIN_X && player.grid_y == FloorGrid.WIN_Y) {
             JOptionPane.showMessageDialog(null,
                     "You won.",
                     "Winner",
                     JOptionPane.PLAIN_MESSAGE);
-        }
-    }
-    
-    private void generateEnemies(int maxEnemies) {
-        Random r = new Random();
-        int num = r.nextInt(1 - maxEnemies) + maxEnemies;
-        
-        while (num > 0) {
-            
-        }
+            floor++;
+//            grid = new FloorGrid(floor + 4, floor + 4);
+        } 
+        repaint();
     }
     
     public static FloorTile[][] getGridLayout() {
