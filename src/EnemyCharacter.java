@@ -14,13 +14,16 @@ import javax.imageio.ImageIO;
 public class EnemyCharacter extends Character {
     public static final String IMG_LOC = FILE_PATH + "enemyS.png";
     
-    public static final int INIT_X = 500;
-    public static final int INIT_Y = 500;
+    public static final int INIT_X = 450;
+    public static final int INIT_Y = 340;
+    public boolean isDead = false;
     
     private static BufferedImage img;
     
     public EnemyCharacter() {
         super(INIT_X, INIT_Y, 100);
+        this.grid_x = 6;
+        this.grid_y = 4;
         
         try {
             if (img == null) {
@@ -29,11 +32,23 @@ public class EnemyCharacter extends Character {
         } catch (IOException e) {
             System.out.println("Internal Error:" + e.getMessage());
         }
+        
+        if (hp <= 0) {
+            isDead = true;
+            this.grid_x = 0;
+            this.grid_y = 0;
+        }
+    }
+    
+    public String getSprite() {
+        return IMG_LOC;
     }
     
     @Override
     public void draw(Graphics g) {
-        g.drawImage(img, pos_x, pos_y, null);
+        if (!isDead) {
+            g.drawImage(img, pos_x, pos_y, null);
+        }
     }
 
     public void moveRandom() {

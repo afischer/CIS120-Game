@@ -43,6 +43,7 @@ public class FloorGrid {
                     layout[x][y] = new StairTile(curX, curY, false);
                     START_X = x;
                     START_Y = y;
+//                    setComponentZOrder(layout[x][y]., 1);
                 } else if (mapArray [x][y] == 'f'){
                     layout[x][y] = new StairTile(curX, curY, true);
                     WIN_X = x;

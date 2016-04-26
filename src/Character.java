@@ -66,4 +66,10 @@ public class Character {
     }
     
     public void draw(Graphics g) {}
+    
+    @Override
+    public String toString() {
+        return "Character at ("+ grid_x + ", "+ grid_y + ");";
+
+    }
 }

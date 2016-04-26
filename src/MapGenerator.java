@@ -36,7 +36,7 @@ public class MapGenerator {
         rows = 2*row+1;
         cols = 2*col+1;
 
-        feild = new char[rows][cols];   //initializes the feild to proper size
+        feild = new char[rows][cols];   //initializes the field to proper size
 
         tracker = new ArrayDeque<Integer[]>(rows*cols);
         //initialize tracker to ample size
