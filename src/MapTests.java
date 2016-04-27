@@ -36,4 +36,23 @@ public class MapTests {
         assertTrue(hasStart && hasEnd);
     }
     
+
+    
+    @Test
+    public void isTraversableTest() {
+        FloorGrid grid = new FloorGrid(7, 7);
+        char[][] layout = grid.getRawCharArray();
+        int startRow = 0;
+        for (int x = 0; x< layout.length; x++) {
+            for (int y = 0; y < layout[0].length; y++) {
+                if (layout[x][y] == 's') {
+                    startRow = x;
+                }
+            }
+        }
+        
+        MazeSolver m = new MazeSolver(layout);
+        assertTrue(m.solve(startRow, 0));
+        
+    }
 }

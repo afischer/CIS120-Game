@@ -112,7 +112,7 @@ public class Dungeon extends JPanel {
     }
     
     private void encounter() {
-        msg = "You encounter an enemy!";
+        msg += "You encounter an enemy!";
         JButton attack = new JButton("Attack!");
         JButton defend = new JButton("Defend");
         JButton flee = new JButton("Run Away!");
@@ -120,7 +120,8 @@ public class Dungeon extends JPanel {
         attack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                msg = "You attack!";
+                if ((ec.hp >= 0)) {
+                msg += "You attack!";
                 try {Thread.sleep(400);} catch (InterruptedException e1) {}
                 int eDmg = 10 + (int)(Math.random() * 20);
                 int pDmg = 5 + (int)(Math.random() * 10);
@@ -128,6 +129,9 @@ public class Dungeon extends JPanel {
                 player.decHP(pDmg);
                 msg += "\nYou dealt " + eDmg + " damage! \n"
                         + "Enemy hits back with " + pDmg +" damage!";
+                System.out.println(ec.hp);} else {
+                    msg = "moo";
+                }
             }
         });
         
@@ -142,7 +146,7 @@ public class Dungeon extends JPanel {
         Object[] buttons = new Object[] {attack, defend, flee};
         ImageIcon sprite = new ImageIcon(ec.getSprite());
         JOptionPane.showOptionDialog(null, msg, "Encounter", 0, JOptionPane.PLAIN_MESSAGE, sprite, buttons, attack);
-    
+        
         
     }
 

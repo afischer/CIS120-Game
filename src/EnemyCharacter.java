@@ -24,7 +24,6 @@ public class EnemyCharacter extends Character {
         super(INIT_X, INIT_Y, 100);
         this.grid_x = 6;
         this.grid_y = 4;
-        
         try {
             if (img == null) {
                 img = ImageIO.read(new File(IMG_LOC));
@@ -33,11 +32,6 @@ public class EnemyCharacter extends Character {
             System.out.println("Internal Error:" + e.getMessage());
         }
         
-        if (hp <= 0) {
-            isDead = true;
-            this.grid_x = 0;
-            this.grid_y = 0;
-        }
     }
     
     public String getSprite() {
@@ -46,6 +40,11 @@ public class EnemyCharacter extends Character {
     
     @Override
     public void draw(Graphics g) {
+        if (hp <= 0) {
+            isDead = true;
+            this.grid_x = 0;
+            this.grid_y = 0;
+        }
         if (!isDead) {
             g.drawImage(img, pos_x, pos_y, null);
         }
